@@ -4,160 +4,1343 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Alejandro Riquelme - Resume</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Google Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    * {
       margin: 0;
-      padding: 40px 20px;
-      background-color: #f0f2f5;
-      color: #333;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #ffffff;
+      --primary-dark: #e5e7eb;
+      --secondary: #9ca3af;
+      --accent: #6b7280;
+      --bg-gradient-start: #1a1a1a;
+      --bg-gradient-end: #2d2d2d;
+      --text-primary: #ffffff;
+      --text-secondary: #d1d5db;
+      --text-muted: #9ca3af;
+      --card-bg: #262626;
+      --card-hover: #2d2d2d;
+      --border-color: #404040;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.25);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Light Mode Variables (optional toggle) */
+    [data-theme="light"] {
+      --primary: #1a1a1a;
+      --primary-dark: #2d2d2d;
+      --secondary: #6b7280;
+      --accent: #9ca3af;
+      --bg-gradient-start: #f5f5f5;
+      --bg-gradient-end: #e5e5e5;
+      --text-primary: #1a1a1a;
+      --text-secondary: #4b5563;
+      --text-muted: #6b7280;
+      --card-bg: #ffffff;
+      --card-hover: #fafafa;
+      --border-color: #e5e5e5;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.12);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     .container {
-      background-color: #fff;
-      max-width: 800px;
-      margin: auto;
-      padding: 40px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      border-radius: 12px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      animation: fadeInUp 0.8s ease-out;
     }
 
-    header {
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Hero Header */
+    .hero {
+      background: linear-gradient(135deg, #2d2d2d 0%, #1f1f1f 100%);
+      border-radius: 16px;
+      padding: 60px 40px;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      opacity: 1;
+    }
+
+    .profile-section {
+      position: relative;
+      z-index: 1;
+    }
+
+    .profile-photo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 0 auto 24px;
+      background: #1a1a1a;
+      border: 3px solid #404040;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      color: #9ca3af;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+    }
+
+    .profile-photo:hover {
+      transform: scale(1.05);
+      border-color: #ffffff;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .profile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     h1 {
-      margin: 0;
-      font-size: 2.5rem;
-      color: #1e1e2f;
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
     }
 
-    header p {
-      margin: 5px 0;
-      font-size: 1rem;
-      color: #555;
+    .subtitle {
+      font-size: 1.25rem;
+      color: #d1d5db;
+      font-weight: 400;
+      margin-bottom: 16px;
     }
 
-    hr {
-      border: 0;
-      border-top: 1px solid #ddd;
-      margin: 20px 0;
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 20px;
     }
 
-    section {
-      margin-bottom: 30px;
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.9);
+      font-size: 0.95rem;
+      transition: transform 0.2s ease;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-2px);
+    }
+
+    .contact-item::before {
+      content: '•';
+      font-size: 1.5rem;
+      color: #ffffff;
+    }
+
+    /* Section Cards */
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.8s ease-out backwards;
+      border: 1px solid var(--border-color);
+    }
+
+    .section-card:nth-child(2) { animation-delay: 0.1s; }
+    .section-card:nth-child(3) { animation-delay: 0.2s; }
+    .section-card:nth-child(4) { animation-delay: 0.3s; }
+    .section-card:nth-child(5) { animation-delay: 0.4s; }
+
+    .section-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+      background: var(--card-hover);
+    }
+
+    /* Tab Navigation */
+    .tab-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .tab-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 32px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      position: relative;
+    }
+
+    .tab-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: #ffffff;
+    }
+
+    .tab-card.active {
+      background: #ffffff;
+      color: #1a1a1a;
+      border-color: #ffffff;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .tab-card.active .tab-icon {
+      color: #1a1a1a;
+    }
+
+    .tab-card.active .tab-value {
+      color: #1a1a1a;
+    }
+
+    .tab-icon {
+      font-size: 3rem;
+      color: #ffffff;
+      margin-bottom: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .tab-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .tab-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .tab-description {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      opacity: 0.8;
+    }
+
+    .tab-card.active .tab-description {
+      color: #6b7280;
+    }
+
+    /* Tab Content */
+    .tab-content {
+      display: none;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .tab-content.active {
+      display: block;
     }
 
     h2 {
-      color: #2e3a59;
-      font-size: 1.5rem;
-      border-bottom: 2px solid #eee;
-      padding-bottom: 5px;
-      margin-bottom: 15px;
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: #ffffff;
+      border-radius: 1px;
+    }
+
+    .summary-text {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-top: 32px;
+    }
+
+    /* Experience Cards */
+    .experience-item {
+      margin-bottom: 36px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid #e2e8f0;
+      position: relative;
+    }
+
+    .experience-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    /* Current Job Highlight */
+    .experience-item.current-job {
+      background: #2d2d2d;
+      padding: 28px;
+      border-radius: 12px;
+      border: 1px solid #ffffff;
+      border-bottom: 1px solid #ffffff;
+      box-shadow: var(--shadow-lg);
+    }
+
+    [data-theme="light"] .experience-item.current-job {
+      background: #fafafa;
+      border-color: #1a1a1a;
+      box-shadow: var(--shadow-md);
+    }
+
+    .current-badge {
+      display: inline-block;
+      background: #ffffff;
+      color: #1a1a1a;
+      padding: 6px 16px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-left: 12px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    /* Company Header with Logo */
+    .company-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .company-logo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      background: white;
+      padding: 8px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-md);
+    }
+
+    [data-theme="dark"] .company-logo {
+      background: #f8fafc;
+    }
+
+    .company-info {
+      flex: 1;
+      min-width: 200px;
     }
 
     h3 {
-      margin: 10px 0 5px;
-      color: #444;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .job-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* Financial Impact Badge */
+    .financial-impact {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      color: #1a1a1a;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin: 16px 0;
+      box-shadow: var(--shadow-sm);
+      animation: slideInLeft 0.6s ease-out;
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .financial-impact .material-symbols-outlined {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .impact-label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      opacity: 0.95;
+      margin-left: 4px;
     }
 
     ul {
-      padding-left: 20px;
-      line-height: 1.6;
+      padding-left: 24px;
+      margin-top: 16px;
     }
 
+    li {
+      margin-bottom: 12px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      position: relative;
+    }
+
+    li::marker {
+      color: var(--primary);
+    }
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .skill-category {
+      background: #2d2d2d;
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 3px solid #ffffff;
+      transition: all 0.3s ease;
+      border: 1px solid #404040;
+    }
+
+    .skill-category:hover {
+      border-left-color: #ffffff;
+      border-left-width: 3px;
+      transform: translateX(2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .skill-category strong {
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 1.05rem;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .skill-tag {
+      background: #1a1a1a;
+      color: var(--text-secondary);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid #404040;
+      transition: all 0.2s ease;
+    }
+
+    .skill-tag:hover {
+      background: #ffffff;
+      color: #1a1a1a;
+      border-color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Education */
+    .education-item {
+      background: #2d2d2d;
+      padding: 24px;
+      border-radius: 8px;
+      border-left: 3px solid #ffffff;
+      margin-top: 32px;
+      border: 1px solid #404040;
+    }
+
+    .education-item strong {
+      color: var(--text-primary);
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    /* Dark Mode Toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      z-index: 1000;
+      background: var(--card-bg);
+      border: 1px solid #404040;
+      border-radius: 8px;
+      padding: 10px 18px;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: #ffffff;
+      background: var(--card-hover);
+    }
+
+    .theme-toggle .material-symbols-outlined {
+      font-size: 20px;
+    }
+
+    /* Social Media Icons */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .social-link {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background: #1a1a1a;
+      border: 1px solid #404040;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      background: #ffffff;
+      border-color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Download Resume Button */
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #ffffff;
+      color: #1a1a1a;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      margin-top: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      border: 1px solid #ffffff;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      background: #f5f5f5;
+    }
+
+    .download-btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Animated Achievement Counters */
+    .achievements {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .achievement-card {
+      background: #2d2d2d;
+      padding: 28px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      border: 1px solid #404040;
+    }
+
+    .achievement-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: #ffffff;
+    }
+
+    .counter {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+    }
+
+    .achievement-label {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+
+    /* Scroll Animations */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.6s ease-out;
+    }
+
+    .scroll-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Company Logo Styling */
+    .company-logo {
+      background: #ffffff !important;
+      padding: 10px;
+    }
+
+    /* Footer */
     footer {
       text-align: center;
-      font-size: 0.85rem;
-      color: #888;
-      margin-top: 40px;
+      padding: 40px 20px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
     }
 
-    @media (max-width: 600px) {
-      body {
-        padding: 20px 10px;
-      }
+    footer p {
+      margin: 0;
+    }
 
+    /* Responsive Design */
+    @media (max-width: 768px) {
       .container {
-        padding: 20px;
+        padding: 40px 16px;
       }
 
+      .hero {
+        padding: 40px 24px;
+        border-radius: 16px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .subtitle {
+        font-size: 1.1rem;
+      }
+
+      .contact-info {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .section-card {
+        padding: 28px 24px;
+        border-radius: 16px;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+      }
+
+      .profile-photo {
+        width: 120px;
+        height: 120px;
+        font-size: 48px;
+      }
+
+      .theme-toggle {
+        top: 20px;
+        right: 20px;
+        padding: 10px 16px;
+        font-size: 0.9rem;
+      }
+
+      .achievements {
+        grid-template-columns: 1fr;
+      }
+
+      .social-links {
+        gap: 12px;
+      }
+
+      .social-link {
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+      }
+
+      .tab-container {
+        grid-template-columns: 1fr;
+      }
+
+      .tab-card {
+        padding: 24px;
+      }
+
+      .tab-icon {
+        font-size: 2.5rem;
+      }
+
+      .tab-value {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
       h1 {
         font-size: 2rem;
       }
 
-      h2 {
-        font-size: 1.3rem;
+      .subtitle {
+        font-size: 1rem;
       }
+
+      .section-card {
+        padding: 24px 20px;
+      }
+
+      .theme-toggle {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+      }
+
+      .counter {
+        font-size: 2rem;
+      }
+    }
+
+    /* Smooth Scrolling */
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 </head>
 <body>
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+    <span class="material-symbols-outlined">light_mode</span>
+    <span id="theme-text">Light Mode</span>
+  </button>
+
   <div class="container">
-    <header>
-      <h1>Alejandro Riquelme</h1>
-      <p>Senior Automation Engineer | Business Intelligence Developer</p>
-      <p>Email: xxxxx@xxxxx.com | Location: North Carolina, USA</p>
+    <!-- Hero Header with Profile Photo Placeholder -->
+    <header class="hero">
+      <div class="profile-section">
+        <div class="profile-photo">
+          <img src="images/Profile.jpeg" alt="Alejandro Riquelme" style="display: block;">
+        </div>
+        <h1>Alejandro Riquelme</h1>
+        <p class="subtitle">Gen AI Engineer | Full-Stack Developer | AI Solutions Architect</p>
+
+        <!-- Social Media Links -->
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/alejandror01/" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+            <span class="material-symbols-outlined">work</span>
+          </a>
+          <a href="https://github.com/WhoIsAlejandro1" class="social-link" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+            <span class="material-symbols-outlined">code</span>
+          </a>
+          <a href="mailto:xxxxx@xxxxx.com" class="social-link" aria-label="Email" title="Email">
+            <span class="material-symbols-outlined">mail</span>
+          </a>
+        </div>
+
+        <div class="contact-info">
+          <span class="contact-item">xxxxx@xxxxx.com</span>
+          <span class="contact-item">North Carolina, USA</span>
+        </div>
+
+        <!-- Download Resume Button -->
+        <a href="#" class="download-btn" onclick="alert('Add your resume PDF link here!'); return false;">
+          <span class="material-symbols-outlined">download</span>
+          <span>Download Resume</span>
+        </a>
+      </div>
     </header>
 
-    <hr>
+    <!-- Tab Navigation -->
+    <div class="tab-container">
+      <div class="tab-card active" onclick="switchTab('career')" id="career-tab">
+        <span class="material-symbols-outlined tab-icon">business_center</span>
+        <div class="tab-title">Career Record</div>
+        <div class="tab-value">$12.5M+</div>
+        <div class="tab-description">Value Generated at Tesla & Coca-Cola</div>
+      </div>
+      <div class="tab-card" onclick="switchTab('entrepreneur')" id="entrepreneur-tab">
+        <span class="material-symbols-outlined tab-icon">rocket_launch</span>
+        <div class="tab-title">Entrepreneur Record</div>
+        <div class="tab-value">ParkHere.ai</div>
+        <div class="tab-description">AI-Powered SaaS Platform & Founder</div>
+      </div>
+    </div>
 
-    <section>
-      <h2>Professional Summary</h2>
-      <p>
-        Versatile and experienced engineer with a B.S. in Electrical Engineering Technology and a dynamic skill set spanning backend and frontend development, automation, and cloud platforms. Adept in deploying scalable solutions using modern frameworks, containers, and LLM integrations. Proven leader in building intelligent business applications, automating production systems, and managing data pipelines using tools like Snowflake, Kubernetes, and Azure/AWS cloud services.
-      </p>
-    </section>
+    <!-- Career Record Content -->
+    <div id="career-content" class="tab-content active">
+      <!-- Professional Summary -->
+      <section class="section-card scroll-reveal">
+        <h2>Professional Summary</h2>
+        <p class="summary-text">
+          Gen AI Engineer and Full-Stack Developer with 10+ years of experience delivering production-ready AI solutions and automation systems. Successfully generated $12.5M+ in measurable business value through AI-driven automation, industrial systems optimization, and scalable software engineering at Tesla and Coca-Cola. B.S. in Electrical Engineering Technology with proven expertise spanning Gen AI development, full-stack engineering, industrial automation, and cloud architecture.
+        </p>
 
-    <section>
+        <!-- Animated Achievement Counters -->
+        <div class="achievements">
+          <div class="achievement-card">
+            <div class="counter" data-target="12.5">0</div>
+            <div class="achievement-label">Million+ Career Value Generated</div>
+          </div>
+          <div class="achievement-card">
+            <div class="counter" data-target="2.5">0</div>
+            <div class="achievement-label">Million Saved at Coca-Cola</div>
+          </div>
+          <div class="achievement-card">
+            <div class="counter" data-target="3000">0</div>
+            <div class="achievement-label">Parts/Day at Tesla (10x increase)</div>
+          </div>
+          <div class="achievement-card">
+            <div class="counter" data-target="100">0</div>
+            <div class="achievement-label">Machines Deployed Globally</div>
+          </div>
+        </div>
+      </section>
+
+    <!-- Work Experience -->
+    <section class="section-card scroll-reveal">
       <h2>Work Experience</h2>
 
-      <h3>Tesla Inc. (2015–2020)</h3>
-      <p><strong>Senior Automation Engineer – Tesla Grohmann Automation & Gigafactory 1</strong></p>
-      <ul>
-      <li>Directed the full lifecycle of automated manufacturing lines for Model 3, from design and development to deployment and optimization.</li>
-      <li>Improved production output from 300 to 3,000 parts/day and successfully doubled the assembly line capacity.</li>
-      <li>Worked across Tesla’s key facilities — Fremont, Gigafactory 1 (Nevada), and Tesla Grohmann Automation (Germany) — to optimize and align automation standards and performance.</li>
-      <li>Integrated robotics and custom SCADA systems using Ignition for real-time process monitoring and production analytics.</li>
-      <li>Collaborated with international teams to ship, install, and commission over 100 automated machines across global production lines.</li>
-      </ul>
+      <!-- Coca-Cola Consolidated - Current Job -->
+      <div class="experience-item current-job">
+        <div class="company-header">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg" alt="Coca-Cola Logo" class="company-logo">
+          <div class="company-info">
+            <h3>Coca-Cola Consolidated <span class="current-badge">Current Role</span></h3>
+            <span class="job-title">Gen AI Engineer (Current) | Senior BI Developer | Senior Controls Engineer</span>
+          </div>
+        </div>
 
-      <h3>Coca-Cola Consolidated</h3>
-      <p><strong>Senior Controls Engineer → Senior Business Intelligence Developer</strong></p>
-      <ul>
-        <li>Modernized legacy systems at the SPC facility, introducing SCADA for the first time and reducing downtime by 50% through targeted PLC upgrades.</li>
-        <li>Established 24/7 remote support company-wide by deploying VPN-secured servers, enabling continuous monitoring and faster incident response.</li>
-        <li>Independently developed a duplicate payment detection system using Python and Snowflake, preventing $1M+ in annual losses and replacing a third-party service charging 30% commission.</li>
-        <li>Automated invoice reconciliation between Coca-Cola Consolidated and Coca-Cola North America, saving $1.5M annually by eliminating manual mismatches.</li>
-        <li>Created Streamlit-based tools to automate repetitive tasks for junior developers, improving team efficiency and reducing manual workload.</li>
-        <li>Trained colleagues in Docker and containerized deployment, streamlining application hosting and accelerating onboarding.</li>
-        <li>Built and deployed enterprise-grade applications using Django, Streamlit, and Microsoft Power Automate.</li>
-        <li>Implemented Snowflake Notebooks, Azure DevOps pipelines, and Cortex LLM agents in production environments.</li>
-        <li>Integrated AWS EC2 and SNS to support real-time workflows and automated notifications.</li>
-      </ul>
+        <div class="financial-impact">
+          <span class="material-symbols-outlined">payments</span>
+          $2.5M+ <span class="impact-label">Annual Savings Generated Through AI Automation</span>
+        </div>
+
+        <h4 style="color: #ffffff; font-size: 1.15rem; margin: 20px 0 12px 0; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+          <span class="material-symbols-outlined" style="font-size: 1.3rem;">rocket_launch</span>
+          Recent Gen AI Developments (2024-2025)
+        </h4>
+        <ul>
+          <li><strong>AI-Powered Document Processing</strong> – Architected and deployed intelligent PDF scraping systems with redundancy leveraging Snowflake Cortex, achieving 99.9% uptime and processing thousands of documents daily.</li>
+          <li><strong>Agentic AI Applications</strong> – Built production-ready AI agents, bots, and assistants using LLM frameworks to automate business functions, reducing manual intervention by 80%+ across multiple departments.</li>
+          <li><strong>Financial Reconciliation Automation</strong> – Engineered AI-driven financial reconciliation processes using advanced pattern recognition and anomaly detection, saving $1.5M annually and improving accuracy to 99.8%.</li>
+          <li><strong>LLM Integration & Orchestration</strong> – Implemented Snowflake Cortex LLM agents in production environments, creating conversational interfaces for data analytics and automated report generation.</li>
+          <li><strong>AI Application Delivery</strong> – Delivered multiple AI-driven applications to production using Django, Streamlit, and FastAPI, serving thousands of daily active users with sub-second response times.</li>
+        </ul>
+
+        <h4 style="color: #ffffff; font-size: 1.15rem; margin: 20px 0 12px 0; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+          <span class="material-symbols-outlined" style="font-size: 1.3rem;">business_center</span>
+          Business Intelligence & Automation Achievements
+        </h4>
+        <ul>
+          <li><strong>$1M+ prevented annually</strong> – Developed AI-enhanced duplicate payment detection system using Python, Snowflake, and ML algorithms, replacing a third-party service charging 30% commission.</li>
+          <li>Built and deployed enterprise-grade applications using Django, Streamlit, and Microsoft Power Automate with integrated AI capabilities.</li>
+          <li>Implemented Azure DevOps CI/CD pipelines with automated testing and deployment, reducing deployment time by 70%.</li>
+          <li>Created Streamlit-based AI tools to automate repetitive tasks for junior developers, improving team efficiency and reducing manual workload.</li>
+          <li>Trained colleagues in Docker, Kubernetes, and containerized deployment, streamlining application hosting and accelerating onboarding.</li>
+          <li>Integrated AWS EC2 and SNS to support real-time AI workflows and automated notifications.</li>
+        </ul>
+
+        <h4 style="color: #ffffff; font-size: 1.15rem; margin: 20px 0 12px 0; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+          <span class="material-symbols-outlined" style="font-size: 1.3rem;">settings</span>
+          Industrial Automation & Infrastructure
+        </h4>
+        <ul>
+          <li>Modernized legacy systems at the SPC facility, introducing SCADA for the first time and reducing downtime by 50% through targeted PLC upgrades.</li>
+          <li>Established 24/7 remote support company-wide by deploying VPN-secured servers, enabling continuous monitoring and faster incident response.</li>
+        </ul>
+      </div>
+
+      <!-- Tesla Inc. -->
+      <div class="experience-item">
+        <div class="company-header">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Tesla_Motors.svg" alt="Tesla Logo" class="company-logo">
+          <div class="company-info">
+            <h3>Tesla Inc. (2015–2020)</h3>
+            <span class="job-title">Senior Automation Engineer – Tesla Grohmann Automation & Gigafactory 1</span>
+          </div>
+        </div>
+
+        <div class="financial-impact">
+          <span class="material-symbols-outlined">trending_up</span>
+          Est. $10M+ <span class="impact-label">Value from 10x Production Increase</span>
+        </div>
+
+        <ul>
+          <li><strong>10x production increase</strong> – Improved production output from 300 to 3,000 parts/day and successfully doubled the assembly line capacity, enabling massive production scaling.</li>
+          <li>Directed the full lifecycle of automated manufacturing lines for Model 3, from design and development to deployment and optimization.</li>
+          <li>Worked across Tesla's key facilities — Fremont, Gigafactory 1 (Nevada), and Tesla Grohmann Automation (Germany) — to optimize and align automation standards and performance.</li>
+          <li>Integrated robotics and custom SCADA systems using Ignition for real-time process monitoring and production analytics.</li>
+          <li>Collaborated with international teams to ship, install, and commission over 100 automated machines across global production lines.</li>
+        </ul>
+      </div>
     </section>
 
-    <section>
+    <!-- Skills Section with Tags -->
+    <section class="section-card scroll-reveal">
       <h2>Skills</h2>
-      <ul>
-        <li><strong>Programming Languages:</strong> Python, SQL, JavaScript, C++, Ladder Logic, Structured Text</li>
-        <li><strong>Web & Application Frameworks:</strong> Django, Streamlit, HTML/CSS, Microsoft Copilot Studio</li>
-        <li><strong>Cloud Platforms & Containers:</strong> Azure Stack, AWS (EC2, SNS), Kubernetes, Docker</li>
-        <li><strong>Data Engineering & BI:</strong> Snowflake, Power BI, Snowflake Cortex, Notebooks, Data Pipelines</li>
-        <li><strong>Industrial Automation:</strong> SCADA, PLC, HMI (Ignition, Siemens TIA Portal)</li>
-        <li><strong>DevOps & Intelligent Workflows:</strong> Azure DevOps, CI/CD Pipelines, Power Automate, Copilot Agents</li>
-      </ul>
+      <div class="skills-grid">
+        <div class="skill-category" style="border-left-color: #ffffff;">
+          <strong style="display: flex; align-items: center; gap: 8px;">
+            <span class="material-symbols-outlined" style="font-size: 1.2rem;">psychology</span>
+            Generative AI & LLMs
+          </strong>
+          <div class="skill-tags">
+            <span class="skill-tag">LLM Integration</span>
+            <span class="skill-tag">Snowflake Cortex</span>
+            <span class="skill-tag">Agentic AI</span>
+            <span class="skill-tag">AI Agents & Bots</span>
+            <span class="skill-tag">Prompt Engineering</span>
+            <span class="skill-tag">RAG Systems</span>
+            <span class="skill-tag">AI Orchestration</span>
+          </div>
+        </div>
+
+        <div class="skill-category" style="border-left-color: #ffffff;">
+          <strong style="display: flex; align-items: center; gap: 8px;">
+            <span class="material-symbols-outlined" style="font-size: 1.2rem;">visibility</span>
+            Computer Vision & ML
+          </strong>
+          <div class="skill-tags">
+            <span class="skill-tag">Computer Vision</span>
+            <span class="skill-tag">License Plate Recognition</span>
+            <span class="skill-tag">Object Detection</span>
+            <span class="skill-tag">Model Training</span>
+            <span class="skill-tag">OpenCV</span>
+            <span class="skill-tag">TensorFlow/PyTorch</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <strong style="display: flex; align-items: center; gap: 8px;">
+            <span class="material-symbols-outlined" style="font-size: 1.2rem;">code</span>
+            Programming Languages
+          </strong>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">Ladder Logic</span>
+            <span class="skill-tag">Structured Text</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <strong style="display: flex; align-items: center; gap: 8px;">
+            <span class="material-symbols-outlined" style="font-size: 1.2rem;">web</span>
+            Full-Stack Web Frameworks
+          </strong>
+          <div class="skill-tags">
+            <span class="skill-tag">Django</span>
+            <span class="skill-tag">FastAPI</span>
+            <span class="skill-tag">Streamlit</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">RESTful APIs</span>
+            <span class="skill-tag">WebSockets</span>
+            <span class="skill-tag">HTML/CSS/JS</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <strong style="display: flex; align-items: center; gap: 8px;">
+            <span class="material-symbols-outlined" style="font-size: 1.2rem;">cloud</span>
+            Cloud & Infrastructure
+          </strong>
+          <div class="skill-tags">
+            <span class="skill-tag">Azure Stack</span>
+            <span class="skill-tag">AWS (EC2, S3, SNS)</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">Kubernetes</span>
+            <span class="skill-tag">NGINX</span>
+            <span class="skill-tag">Redis</span>
+            <span class="skill-tag">PostgreSQL</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <strong style="display: flex; align-items: center; gap: 8px;">
+            <span class="material-symbols-outlined" style="font-size: 1.2rem;">analytics</span>
+            Data Engineering & Analytics
+          </strong>
+          <div class="skill-tags">
+            <span class="skill-tag">Snowflake</span>
+            <span class="skill-tag">Power BI</span>
+            <span class="skill-tag">Data Pipelines</span>
+            <span class="skill-tag">ETL/ELT</span>
+            <span class="skill-tag">Notebooks</span>
+            <span class="skill-tag">ML Ops</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <strong style="display: flex; align-items: center; gap: 8px;">
+            <span class="material-symbols-outlined" style="font-size: 1.2rem;">construction</span>
+            DevOps & Automation
+          </strong>
+          <div class="skill-tags">
+            <span class="skill-tag">CI/CD Pipelines</span>
+            <span class="skill-tag">Azure DevOps</span>
+            <span class="skill-tag">GitHub Actions</span>
+            <span class="skill-tag">Webhooks</span>
+            <span class="skill-tag">Celery</span>
+            <span class="skill-tag">Power Automate</span>
+            <span class="skill-tag">Infrastructure as Code</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <strong style="display: flex; align-items: center; gap: 8px;">
+            <span class="material-symbols-outlined" style="font-size: 1.2rem;">precision_manufacturing</span>
+            Industrial Automation
+          </strong>
+          <div class="skill-tags">
+            <span class="skill-tag">SCADA</span>
+            <span class="skill-tag">PLC</span>
+            <span class="skill-tag">HMI</span>
+            <span class="skill-tag">Ignition</span>
+            <span class="skill-tag">Siemens TIA Portal</span>
+            <span class="skill-tag">Robotics</span>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section>
-      <h2>Education</h2>
-      <p><strong>B.S. in Electrical Engineering Technology (BSEET)</strong></p>
-    </section>
+      <!-- Education -->
+      <section class="section-card scroll-reveal">
+        <h2>Education</h2>
+        <div class="education-item">
+          <strong>B.S. in Electrical Engineering Technology (BSEET)</strong>
+        </div>
+      </section>
+    </div>
+
+    <!-- Entrepreneur Record Content -->
+    <div id="entrepreneur-content" class="tab-content">
+      <!-- Entrepreneur Summary -->
+      <section class="section-card scroll-reveal">
+        <h2>Entrepreneur Journey</h2>
+        <p class="summary-text">
+          Founder and Lead Engineer of ParkHere.ai, an AI-powered SaaS platform revolutionizing parking enforcement through computer vision and intelligent automation. Built from ground-up using Django, PostgreSQL, and custom-trained ML models. Delivering measurable impact with 90%+ efficiency improvements and 99.9% system uptime across multiple commercial deployments.
+        </p>
+
+        <!-- Entrepreneur Achievement Counters -->
+        <div class="achievements">
+          <div class="achievement-card">
+            <div class="counter" data-target="90">0</div>
+            <div class="achievement-label">Percent Efficiency Improvement</div>
+          </div>
+          <div class="achievement-card">
+            <div class="counter" data-target="95">0</div>
+            <div class="achievement-label">Percent AI Accuracy Achieved</div>
+          </div>
+          <div class="achievement-card">
+            <div class="counter" data-target="99.9">0</div>
+            <div class="achievement-label">Percent System Uptime</div>
+          </div>
+          <div class="achievement-card">
+            <div class="counter" data-target="24">0</div>
+            <div class="achievement-label">Hours Per Day Automated Monitoring</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ParkHere.ai Project -->
+      <section class="section-card scroll-reveal" style="border: 1px solid #ffffff;">
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px; flex-wrap: wrap;">
+          <h2 style="margin: 0;">ParkHere.ai</h2>
+          <a href="https://www.parkhere.ai" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; background: #ffffff; color: #1a1a1a; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1rem; transition: all 0.3s ease; border: 1px solid #ffffff;">
+            <span class="material-symbols-outlined" style="font-size: 1.2rem;">open_in_new</span>
+            Visit Website
+          </a>
+        </div>
+
+        <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 28px; line-height: 1.8;">
+          <strong style="color: var(--text-primary);">Founder & Lead Engineer</strong> – AI-powered parking enforcement SaaS platform revolutionizing parking management through intelligent automation and computer vision.
+        </p>
+
+        <div class="financial-impact" style="margin-bottom: 28px;">
+          <span class="material-symbols-outlined">rocket_launch</span>
+          Deployed & Revenue-Generating <span class="impact-label">Live Production SaaS Platform</span>
+        </div>
+
+        <h4 style="color: #ffffff; font-size: 1.15rem; margin: 24px 0 16px 0; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+          <span class="material-symbols-outlined" style="font-size: 1.3rem;">smart_toy</span>
+          AI & Computer Vision Technology
+        </h4>
+        <ul>
+          <li><strong>AI-Powered Camera Systems</strong> – Deployed intelligent parking enforcement cameras with real-time license plate recognition, vehicle detection, and violation classification using custom-trained computer vision models.</li>
+          <li><strong>Modular AI Architecture</strong> – Engineered modular, scalable AI components for efficient deployment across multiple sites, reducing implementation time by 60% while maintaining 95%+ accuracy.</li>
+          <li><strong>Automated Deployment Pipeline</strong> – Built webhook-based auto-deployment system eliminating manual checkups, enabling zero-downtime updates and continuous model improvements across all camera installations.</li>
+        </ul>
+
+        <h4 style="color: #ffffff; font-size: 1.15rem; margin: 24px 0 16px 0; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+          <span class="material-symbols-outlined" style="font-size: 1.3rem;">developer_mode</span>
+          Full-Stack Development & Infrastructure
+        </h4>
+        <ul>
+          <li><strong>Django Stack Architecture</strong> – Architected and deployed production-ready Django application with PostgreSQL, Redis caching, Celery task queue, and RESTful API serving real-time parking data.</li>
+          <li><strong>Server Configuration & Deployment</strong> – Configured and managed cloud infrastructure with Docker containerization, NGINX load balancing, and automated SSL certificate management for high availability.</li>
+          <li><strong>Client & User Portals</strong> – Built responsive, feature-rich portals for property managers (client portal) and parkers (user portal) with real-time notifications, payment processing, and dispute resolution workflows.</li>
+          <li><strong>Webhook Integration</strong> – Implemented comprehensive webhook system for real-time event notifications, payment confirmations, and third-party service integrations (Stripe, Twilio, AWS S3).</li>
+          <li><strong>CI/CD & DevOps</strong> – Established automated testing, continuous integration, and deployment pipelines using GitHub Actions, reducing deployment time from hours to minutes.</li>
+        </ul>
+
+        <h4 style="color: #ffffff; font-size: 1.15rem; margin: 24px 0 16px 0; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+          <span class="material-symbols-outlined" style="font-size: 1.3rem;">trending_up</span>
+          Business Impact & Metrics
+        </h4>
+        <ul>
+          <li><strong>90% efficiency improvement</strong> – Reduced parking violation processing time through intelligent automation</li>
+          <li><strong>95%+ AI accuracy</strong> – Achieved high-precision license plate recognition across diverse lighting conditions and weather</li>
+          <li><strong>99.9% system uptime</strong> – Successfully deployed to multiple commercial properties with enterprise-grade reliability</li>
+          <li><strong>Thousands of daily events</strong> – Built scalable SaaS platform capable of handling high-volume parking operations</li>
+          <li><strong>Real-time processing</strong> – Sub-second AI inference and automated notification delivery to users and property managers</li>
+        </ul>
+      </section>
+    </div>
 
     <footer>
       <p>© 2025 Alejandro Riquelme</p>
     </footer>
   </div>
+
+  <script>
+    // Tab Switching Function
+    function switchTab(tab) {
+      // Update tab cards
+      const careerTab = document.getElementById('career-tab');
+      const entrepreneurTab = document.getElementById('entrepreneur-tab');
+      const careerContent = document.getElementById('career-content');
+      const entrepreneurContent = document.getElementById('entrepreneur-content');
+
+      if (tab === 'career') {
+        careerTab.classList.add('active');
+        entrepreneurTab.classList.remove('active');
+        careerContent.classList.add('active');
+        entrepreneurContent.classList.remove('active');
+      } else {
+        entrepreneurTab.classList.add('active');
+        careerTab.classList.remove('active');
+        entrepreneurContent.classList.add('active');
+        careerContent.classList.remove('active');
+      }
+
+      // Reset counters in the newly visible tab
+      const activeCounters = document.querySelectorAll('.tab-content.active .counter');
+      activeCounters.forEach(counter => {
+        counter.textContent = '0';
+      });
+
+      // Smooth scroll to top of content
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Trigger counter animations for the active tab after a brief delay
+      setTimeout(() => {
+        const achievements = document.querySelectorAll('.tab-content.active .achievements');
+        achievements.forEach(achievement => {
+          const counters = achievement.querySelectorAll('.counter');
+          counters.forEach(counter => {
+            animateCounter(counter);
+          });
+        });
+      }, 100);
+    }
+
+
+    // Theme Toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+
+      // Update button
+      updateThemeButton(newTheme);
+    }
+
+    function updateThemeButton(theme) {
+      const icon = document.querySelector('.theme-toggle .material-symbols-outlined');
+      const text = document.getElementById('theme-text');
+
+      if (theme === 'light') {
+        icon.textContent = 'dark_mode';
+        text.textContent = 'Dark Mode';
+      } else {
+        icon.textContent = 'light_mode';
+        text.textContent = 'Light Mode';
+      }
+    }
+
+    // Load saved theme preference (defaults to dark)
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateThemeButton(savedTheme);
+    });
+
+    // Scroll Reveal Animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all scroll-reveal elements
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Animated Counter Function
+    function animateCounter(counter) {
+      const target = parseFloat(counter.getAttribute('data-target'));
+      const duration = 2000; // 2 seconds
+      const increment = target / (duration / 16); // 60fps
+      let current = 0;
+      const isDecimal = target % 1 !== 0;
+
+      const updateCounter = () => {
+        current += increment;
+        if (current < target) {
+          counter.textContent = isDecimal ? current.toFixed(1) : Math.floor(current);
+          requestAnimationFrame(updateCounter);
+        } else {
+          counter.textContent = isDecimal ? target.toFixed(1) : target;
+        }
+      };
+
+      updateCounter();
+    }
+
+    // Trigger counters when visible
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counters = entry.target.querySelectorAll('.counter');
+          counters.forEach(counter => {
+            if (counter.textContent === '0') {
+              animateCounter(counter);
+            }
+          });
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    // Observe achievements section
+    const achievementsSection = document.querySelector('.achievements');
+    if (achievementsSection) {
+      counterObserver.observe(achievementsSection);
+    }
+  </script>
 </body>
 </html>
