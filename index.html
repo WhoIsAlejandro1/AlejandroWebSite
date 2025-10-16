@@ -281,10 +281,30 @@
       font-size: 0.95rem;
       color: var(--text-secondary);
       opacity: 0.8;
+      margin-bottom: 16px;
     }
 
     .tab-card.active .tab-description {
       color: #6b7280;
+    }
+
+    .tab-cta {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-top: 12px;
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
+
+    .tab-card:hover .tab-cta {
+      opacity: 1;
+      transform: translateX(4px);
+    }
+
+    .tab-card.active .tab-cta {
+      color: #1a1a1a;
+      opacity: 0.9;
     }
 
     /* Tab Content */
@@ -851,23 +871,30 @@
     </header>
 
     <!-- Tab Navigation -->
+    <div style="text-align: center; margin-bottom: 32px;">
+      <h2 style="font-size: 2.2rem; margin-bottom: 12px; color: var(--text-primary);">Choose Your Path</h2>
+      <p style="font-size: 1.1rem; color: var(--text-secondary); margin: 0;">Select a journey to explore my professional achievements</p>
+    </div>
+
     <div class="tab-container">
-      <div class="tab-card active" onclick="switchTab('career')" id="career-tab">
+      <div class="tab-card" onclick="switchTab('career')" id="career-tab">
         <span class="material-symbols-outlined tab-icon">business_center</span>
         <div class="tab-title">Career Record</div>
         <div class="tab-value">$12.5M+</div>
         <div class="tab-description">Value Generated at Tesla & Coca-Cola</div>
+        <div class="tab-cta">View Career Journey →</div>
       </div>
       <div class="tab-card" onclick="switchTab('entrepreneur')" id="entrepreneur-tab">
         <span class="material-symbols-outlined tab-icon">rocket_launch</span>
         <div class="tab-title">Entrepreneur Record</div>
         <div class="tab-value">ParkHere.ai</div>
         <div class="tab-description">AI-Powered SaaS Platform & Founder</div>
+        <div class="tab-cta">View Founder Story →</div>
       </div>
     </div>
 
     <!-- Career Record Content -->
-    <div id="career-content" class="tab-content active">
+    <div id="career-content" class="tab-content">
       <!-- Professional Summary -->
       <section class="section-card scroll-reveal">
         <h2>Professional Summary</h2>
@@ -932,7 +959,8 @@
           Business Intelligence & Automation Achievements
         </h4>
         <ul>
-          <li><strong>$1M+ prevented annually</strong> – Developed AI-enhanced duplicate payment detection system using Python, Snowflake, and ML algorithms, replacing a third-party service charging 30% commission.</li>
+          <li><strong>$1.5M+ prevented (growing $500K annually)</strong> – Developed AI-enhanced duplicate payment detection system using Python, Snowflake, and ML algorithms, replacing a third-party service charging 30% commission. Savings compound year-over-year as transaction volume grows.</li>
+          <li><strong>10x vendor processing capacity</strong> – Engineered AI-driven financial reconciliation system that automated vendor data matching and validation, enabling workers to process 1,000 vendors instead of 100 – a 10x productivity improvement through intelligent automation.</li>
           <li>Built and deployed enterprise-grade applications using Django, Streamlit, and Microsoft Power Automate with integrated AI capabilities.</li>
           <li>Implemented Azure DevOps CI/CD pipelines with automated testing and deployment, reducing deployment time by 70%.</li>
           <li>Created Streamlit-based AI tools to automate repetitive tasks for junior developers, improving team efficiency and reducing manual workload.</li>
@@ -1232,8 +1260,13 @@
         counter.textContent = '0';
       });
 
-      // Smooth scroll to top of content
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Smooth scroll to the active content section
+      setTimeout(() => {
+        const activeContent = document.querySelector('.tab-content.active');
+        if (activeContent) {
+          activeContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 50);
 
       // Trigger counter animations for the active tab after a brief delay
       setTimeout(() => {
@@ -1244,7 +1277,7 @@
             animateCounter(counter);
           });
         });
-      }, 100);
+      }, 400);
     }
 
 
