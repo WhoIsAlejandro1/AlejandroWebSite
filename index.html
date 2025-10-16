@@ -21,7 +21,28 @@
       box-sizing: border-box;
     }
 
+    /* Neutral Theme - Before Selection - Clean White */
     :root {
+      --primary: #1a1a1a;
+      --primary-dark: #2d2d2d;
+      --secondary: #6b7280;
+      --accent: #9ca3af;
+      --bg-gradient-start: #ffffff;
+      --bg-gradient-end: #f9fafb;
+      --text-primary: #1a1a1a;
+      --text-secondary: #4b5563;
+      --text-muted: #6b7280;
+      --card-bg: #ffffff;
+      --card-hover: #f9fafb;
+      --border-color: #e5e7eb;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Career Theme - Dark */
+    [data-theme="career"] {
       --primary: #ffffff;
       --primary-dark: #e5e7eb;
       --secondary: #9ca3af;
@@ -40,8 +61,8 @@
       --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
     }
 
-    /* Light Mode Variables (optional toggle) */
-    [data-theme="light"] {
+    /* Entrepreneur Theme - Light */
+    [data-theme="entrepreneur"] {
       --primary: #1a1a1a;
       --primary-dark: #2d2d2d;
       --secondary: #6b7280;
@@ -90,19 +111,53 @@
       }
     }
 
-    /* Hero Header */
+    /* Hero Header - Modern Business Card */
     .hero {
-      background: linear-gradient(135deg, #2d2d2d 0%, #1f1f1f 100%);
-      border-radius: 16px;
-      padding: 60px 40px;
-      text-align: center;
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 48px;
+      text-align: left;
       margin-bottom: 40px;
-      box-shadow: var(--shadow-lg);
+      box-shadow: var(--shadow-xl), inset 0 1px 0 rgba(255,255,255,0.05);
       position: relative;
       overflow: hidden;
       border: 1px solid var(--border-color);
+      transition: all 0.5s ease;
+      backdrop-filter: blur(10px);
     }
 
+    .hero:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+    }
+
+    /* Spotlight effect overlay */
+    .spotlight {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0,0,0,0.04) 0%, transparent 70%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      border-radius: 50%;
+    }
+
+    [data-theme="career"] .spotlight {
+      background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+    }
+
+    [data-theme="entrepreneur"] .spotlight {
+      background: radial-gradient(circle, rgba(0,0,0,0.04) 0%, transparent 70%);
+    }
+
+    [data-theme="entrepreneur"] .hero:hover {
+      box-shadow: var(--shadow-xl), 0 20px 40px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(0,0,0,0.05);
+    }
+
+    /* Noise Texture Overlay */
     .hero::before {
       content: '';
       position: absolute;
@@ -110,36 +165,89 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      background-image:
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="300" height="300" filter="url(%23noise)" opacity="0.05"/></svg>'),
+        linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%, rgba(0,0,0,0.03) 100%);
       opacity: 1;
+      pointer-events: none;
+    }
+
+    [data-theme="entrepreneur"] .hero::before {
+      background-image:
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="300" height="300" filter="url(%23noise)" opacity="0.03"/></svg>'),
+        linear-gradient(135deg, rgba(0,0,0,0.02) 0%, transparent 50%, rgba(0,0,0,0.04) 100%);
+    }
+
+    /* Accent Corner */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle at top right, var(--primary), transparent 70%);
+      opacity: 0.1;
+      pointer-events: none;
     }
 
     .profile-section {
       position: relative;
       z-index: 1;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .profile-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
     }
 
     .profile-photo {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      margin: 0 auto 24px;
-      background: #1a1a1a;
-      border: 3px solid #404040;
+      width: 140px;
+      height: 140px;
+      border-radius: 16px;
+      background: var(--bg-gradient-start);
+      border: 2px solid var(--border-color);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 60px;
-      color: #9ca3af;
+      color: var(--secondary);
       overflow: hidden;
-      box-shadow: var(--shadow-md);
+      box-shadow: var(--shadow-lg), 0 0 0 4px var(--card-bg);
       transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .profile-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+      pointer-events: none;
     }
 
     .profile-photo:hover {
-      transform: scale(1.05);
-      border-color: #ffffff;
-      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow-xl), 0 0 0 4px var(--card-bg), 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .profile-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .profile-header {
+      border-left: 3px solid var(--primary);
+      padding-left: 20px;
     }
 
     .profile-photo img {
@@ -151,45 +259,42 @@
 
     h1 {
       font-family: 'Space Grotesk', 'Inter', sans-serif;
-      font-size: 3.5rem;
+      font-size: 2.75rem;
       font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 12px;
-      letter-spacing: -1px;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+      transition: color 0.5s ease;
+      line-height: 1.1;
     }
 
     .subtitle {
-      font-size: 1.25rem;
-      color: #d1d5db;
+      font-size: 1.1rem;
+      color: var(--text-secondary);
       font-weight: 400;
-      margin-bottom: 16px;
+      margin-bottom: 0;
+      transition: color 0.5s ease;
+      line-height: 1.5;
     }
 
     .contact-info {
       display: flex;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      margin-top: 20px;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .contact-item {
       display: flex;
       align-items: center;
-      gap: 8px;
-      color: rgba(255,255,255,0.9);
+      gap: 10px;
+      color: var(--text-secondary);
       font-size: 0.95rem;
-      transition: transform 0.2s ease;
+      transition: color 0.5s ease;
     }
 
-    .contact-item:hover {
-      transform: translateY(-2px);
-    }
-
-    .contact-item::before {
-      content: '•';
-      font-size: 1.5rem;
-      color: #ffffff;
+    .contact-item .material-symbols-outlined {
+      font-size: 18px;
+      color: var(--primary);
     }
 
     /* Section Cards */
@@ -237,27 +342,27 @@
     .tab-card:hover {
       transform: translateY(-4px);
       box-shadow: var(--shadow-lg);
-      border-color: #ffffff;
+      border-color: var(--primary);
     }
 
     .tab-card.active {
-      background: #ffffff;
-      color: #1a1a1a;
-      border-color: #ffffff;
+      background: var(--primary);
+      color: var(--bg-gradient-start);
+      border-color: var(--primary);
       box-shadow: var(--shadow-xl);
     }
 
     .tab-card.active .tab-icon {
-      color: #1a1a1a;
+      color: var(--bg-gradient-start);
     }
 
     .tab-card.active .tab-value {
-      color: #1a1a1a;
+      color: var(--bg-gradient-start);
     }
 
     .tab-icon {
       font-size: 3rem;
-      color: #ffffff;
+      color: var(--text-primary);
       margin-bottom: 16px;
       transition: all 0.3s ease;
     }
@@ -267,14 +372,17 @@
       font-weight: 600;
       margin-bottom: 12px;
       font-family: 'Space Grotesk', sans-serif;
+      color: var(--text-primary);
+      transition: color 0.3s ease;
     }
 
     .tab-value {
       font-size: 1.8rem;
       font-weight: 700;
-      color: #ffffff;
+      color: var(--text-primary);
       margin-bottom: 8px;
       font-family: 'Space Grotesk', sans-serif;
+      transition: color 0.3s ease;
     }
 
     .tab-description {
@@ -282,10 +390,16 @@
       color: var(--text-secondary);
       opacity: 0.8;
       margin-bottom: 16px;
+      transition: color 0.3s ease;
     }
 
     .tab-card.active .tab-description {
-      color: #6b7280;
+      color: var(--bg-gradient-end);
+      opacity: 0.9;
+    }
+
+    .tab-card.active .tab-title {
+      color: var(--bg-gradient-start);
     }
 
     .tab-cta {
@@ -303,7 +417,7 @@
     }
 
     .tab-card.active .tab-cta {
-      color: #1a1a1a;
+      color: var(--bg-gradient-start);
       opacity: 0.9;
     }
 
@@ -334,8 +448,9 @@
       left: 0;
       width: 50px;
       height: 2px;
-      background: #ffffff;
+      background: var(--primary);
       border-radius: 1px;
+      transition: background 0.5s ease;
     }
 
     .summary-text {
@@ -361,30 +476,26 @@
 
     /* Current Job Highlight */
     .experience-item.current-job {
-      background: #2d2d2d;
+      background: var(--card-hover);
       padding: 28px;
       border-radius: 12px;
-      border: 1px solid #ffffff;
-      border-bottom: 1px solid #ffffff;
+      border: 1px solid var(--primary);
+      border-bottom: 1px solid var(--primary);
       box-shadow: var(--shadow-lg);
-    }
-
-    [data-theme="light"] .experience-item.current-job {
-      background: #fafafa;
-      border-color: #1a1a1a;
-      box-shadow: var(--shadow-md);
+      transition: all 0.5s ease;
     }
 
     .current-badge {
       display: inline-block;
-      background: #ffffff;
-      color: #1a1a1a;
+      background: var(--primary);
+      color: var(--bg-gradient-start);
       padding: 6px 16px;
       border-radius: 6px;
       font-size: 0.85rem;
       font-weight: 600;
       margin-left: 12px;
       animation: pulse 2s infinite;
+      transition: all 0.5s ease;
     }
 
     @keyframes pulse {
@@ -409,10 +520,7 @@
       padding: 8px;
       border-radius: 12px;
       box-shadow: var(--shadow-md);
-    }
-
-    [data-theme="dark"] .company-logo {
-      background: #f8fafc;
+      transition: all 0.3s ease;
     }
 
     .company-info {
@@ -423,8 +531,9 @@
     h3 {
       font-size: 1.4rem;
       font-weight: 600;
-      color: #ffffff;
+      color: var(--text-primary);
       margin-bottom: 4px;
+      transition: color 0.5s ease;
     }
 
     .job-title {
@@ -440,8 +549,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: #ffffff;
-      color: #1a1a1a;
+      background: var(--primary);
+      color: var(--bg-gradient-start);
       padding: 12px 20px;
       border-radius: 8px;
       font-weight: 700;
@@ -449,6 +558,7 @@
       margin: 16px 0;
       box-shadow: var(--shadow-sm);
       animation: slideInLeft 0.6s ease-out;
+      transition: all 0.5s ease;
     }
 
     @keyframes slideInLeft {
@@ -498,16 +608,16 @@
     }
 
     .skill-category {
-      background: #2d2d2d;
+      background: var(--card-hover);
       padding: 20px;
       border-radius: 8px;
-      border-left: 3px solid #ffffff;
-      transition: all 0.3s ease;
-      border: 1px solid #404040;
+      border-left: 3px solid var(--primary);
+      transition: all 0.5s ease;
+      border: 1px solid var(--border-color);
     }
 
     .skill-category:hover {
-      border-left-color: #ffffff;
+      border-left-color: var(--primary);
       border-left-width: 3px;
       transform: translateX(2px);
       box-shadow: var(--shadow-sm);
@@ -529,32 +639,33 @@
     }
 
     .skill-tag {
-      background: #1a1a1a;
+      background: var(--bg-gradient-start);
       color: var(--text-secondary);
       padding: 6px 14px;
       border-radius: 6px;
       font-size: 0.9rem;
       font-weight: 500;
-      border: 1px solid #404040;
-      transition: all 0.2s ease;
+      border: 1px solid var(--border-color);
+      transition: all 0.5s ease;
     }
 
     .skill-tag:hover {
-      background: #ffffff;
-      color: #1a1a1a;
-      border-color: #ffffff;
+      background: var(--primary);
+      color: var(--bg-gradient-start);
+      border-color: var(--primary);
       transform: translateY(-1px);
       box-shadow: var(--shadow-sm);
     }
 
     /* Education */
     .education-item {
-      background: #2d2d2d;
+      background: var(--card-hover);
       padding: 24px;
       border-radius: 8px;
-      border-left: 3px solid #ffffff;
+      border-left: 3px solid var(--primary);
       margin-top: 32px;
-      border: 1px solid #404040;
+      border: 1px solid var(--border-color);
+      transition: all 0.5s ease;
     }
 
     .education-item strong {
@@ -563,65 +674,59 @@
       font-weight: 600;
     }
 
-    /* Dark Mode Toggle */
-    .theme-toggle {
-      position: fixed;
-      top: 30px;
-      right: 30px;
-      z-index: 1000;
-      background: var(--card-bg);
-      border: 1px solid #404040;
-      border-radius: 8px;
-      padding: 10px 18px;
-      cursor: pointer;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s ease;
-      font-weight: 500;
-      color: var(--text-primary);
-      font-size: 0.9rem;
-    }
-
-    .theme-toggle:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-      border-color: #ffffff;
-      background: var(--card-hover);
-    }
-
-    .theme-toggle .material-symbols-outlined {
-      font-size: 20px;
-    }
 
     /* Social Media Icons */
     .social-links {
       display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 24px;
+      gap: 10px;
     }
 
     .social-link {
-      width: 44px;
-      height: 44px;
-      border-radius: 8px;
-      background: #1a1a1a;
-      border: 1px solid #404040;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--bg-gradient-start);
+      border: 1px solid var(--border-color);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       text-decoration: none;
       transition: all 0.3s ease;
+      color: var(--text-primary);
+      position: relative;
+    }
+
+    .social-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .social-link:hover::before {
+      opacity: 1;
     }
 
     .social-link:hover {
-      background: #ffffff;
-      border-color: #ffffff;
+      background: var(--primary);
+      border-color: var(--primary);
       transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+    }
+
+    .social-link:hover .material-symbols-outlined {
+      color: var(--bg-gradient-start);
+    }
+
+    .social-link .material-symbols-outlined {
+      color: var(--text-primary);
+      transition: color 0.3s ease;
+      position: relative;
+      z-index: 1;
     }
 
     /* Download Resume Button */
@@ -629,8 +734,8 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: #ffffff;
-      color: #1a1a1a;
+      background: var(--primary);
+      color: var(--bg-gradient-start);
       padding: 12px 28px;
       border-radius: 8px;
       font-weight: 600;
@@ -638,14 +743,19 @@
       text-decoration: none;
       margin-top: 24px;
       box-shadow: var(--shadow-sm);
-      transition: all 0.3s ease;
-      border: 1px solid #ffffff;
+      transition: all 0.5s ease;
+      border: 1px solid var(--primary);
     }
 
     .download-btn:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow-md);
-      background: #f5f5f5;
+      background: var(--primary-dark);
+    }
+
+    .download-btn .material-symbols-outlined {
+      color: var(--bg-gradient-start);
+      transition: color 0.5s ease;
     }
 
     .download-btn span {
@@ -662,27 +772,28 @@
     }
 
     .achievement-card {
-      background: #2d2d2d;
+      background: var(--card-hover);
       padding: 28px;
       border-radius: 12px;
       text-align: center;
       box-shadow: var(--shadow-sm);
-      transition: all 0.3s ease;
-      border: 1px solid #404040;
+      transition: all 0.5s ease;
+      border: 1px solid var(--border-color);
     }
 
     .achievement-card:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow-md);
-      border-color: #ffffff;
+      border-color: var(--primary);
     }
 
     .counter {
       font-size: 2.5rem;
       font-weight: 700;
-      color: #ffffff;
+      color: var(--primary);
       margin-bottom: 8px;
       font-family: 'Space Grotesk', 'Inter', sans-serif;
+      transition: color 0.5s ease;
     }
 
     .achievement-label {
@@ -703,10 +814,15 @@
       transform: translateY(0);
     }
 
-    /* Company Logo Styling */
+    /* Company Logo Styling - Always white background for logo visibility */
     .company-logo {
       background: #ffffff !important;
       padding: 10px;
+    }
+
+    /* h4 headings in experience sections */
+    h4 {
+      transition: color 0.5s ease;
     }
 
     /* Footer */
@@ -728,21 +844,37 @@
       }
 
       .hero {
-        padding: 40px 24px;
+        padding: 32px 24px;
         border-radius: 16px;
       }
 
+      .profile-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 24px;
+      }
+
+      .profile-header {
+        border-left: none;
+        border-top: 3px solid var(--primary);
+        padding-left: 0;
+        padding-top: 16px;
+      }
+
       h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
       }
 
       .subtitle {
-        font-size: 1.1rem;
+        font-size: 1rem;
       }
 
       .contact-info {
-        flex-direction: column;
-        gap: 12px;
+        align-items: center;
+      }
+
+      .social-links {
+        justify-content: center;
       }
 
       .section-card {
@@ -758,13 +890,6 @@
         width: 120px;
         height: 120px;
         font-size: 48px;
-      }
-
-      .theme-toggle {
-        top: 20px;
-        right: 20px;
-        padding: 10px 16px;
-        font-size: 0.9rem;
       }
 
       .achievements {
@@ -811,11 +936,6 @@
         padding: 24px 20px;
       }
 
-      .theme-toggle {
-        padding: 8px 12px;
-        font-size: 0.85rem;
-      }
-
       .counter {
         font-size: 2rem;
       }
@@ -828,45 +948,50 @@
   </style>
 </head>
 <body>
-  <!-- Theme Toggle -->
-  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-    <span class="material-symbols-outlined">light_mode</span>
-    <span id="theme-text">Light Mode</span>
-  </button>
-
   <div class="container">
-    <!-- Hero Header with Profile Photo Placeholder -->
+    <!-- Hero Header - Modern Business Card -->
     <header class="hero">
       <div class="profile-section">
-        <div class="profile-photo">
-          <img src="images/Profile.jpeg" alt="Alejandro Riquelme" style="display: block;">
-        </div>
-        <h1>Alejandro Riquelme</h1>
-        <p class="subtitle">Gen AI Engineer | Full-Stack Developer | AI Solutions Architect</p>
-
-        <!-- Social Media Links -->
-        <div class="social-links">
-          <a href="https://www.linkedin.com/in/alejandror01/" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
-            <span class="material-symbols-outlined">work</span>
-          </a>
-          <a href="https://github.com/WhoIsAlejandro1" class="social-link" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
-            <span class="material-symbols-outlined">code</span>
-          </a>
-          <a href="mailto:xxxxx@xxxxx.com" class="social-link" aria-label="Email" title="Email">
-            <span class="material-symbols-outlined">mail</span>
-          </a>
-        </div>
-
-        <div class="contact-info">
-          <span class="contact-item">xxxxx@xxxxx.com</span>
-          <span class="contact-item">North Carolina, USA</span>
+        <!-- Left Side: Photo & Social -->
+        <div class="profile-left">
+          <div class="profile-photo">
+            <img src="images/Profile.jpeg" alt="Alejandro Riquelme" style="display: block;">
+          </div>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/alejandror01/" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+              <span class="material-symbols-outlined">work</span>
+            </a>
+            <a href="https://github.com/WhoIsAlejandro1" class="social-link" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+              <span class="material-symbols-outlined">code</span>
+            </a>
+            <a href="mailto:xxxxx@xxxxx.com" class="social-link" aria-label="Email" title="Email">
+              <span class="material-symbols-outlined">mail</span>
+            </a>
+          </div>
         </div>
 
-        <!-- Download Resume Button -->
-        <a href="#" class="download-btn" onclick="alert('Add your resume PDF link here!'); return false;">
-          <span class="material-symbols-outlined">download</span>
-          <span>Download Resume</span>
-        </a>
+        <!-- Right Side: Info -->
+        <div class="profile-right">
+          <div class="profile-header">
+            <h1>Alejandro Riquelme</h1>
+            <p class="subtitle">Gen AI Engineer | Full-Stack Developer | AI Solutions Architect</p>
+          </div>
+
+          <div class="contact-info">
+            <div class="contact-item">
+              <span class="material-symbols-outlined">call</span>
+              <span>+1 (xxx) xxx-xxxx</span>
+            </div>
+            <div class="contact-item">
+              <span class="material-symbols-outlined">mail</span>
+              <span>xxxxx@xxxxx.com</span>
+            </div>
+            <div class="contact-item">
+              <span class="material-symbols-outlined">location_on</span>
+              <span>North Carolina, USA</span>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -942,7 +1067,7 @@
           $2.5M+ <span class="impact-label">Annual Savings Generated Through AI Automation</span>
         </div>
 
-        <h4 style="color: #ffffff; font-size: 1.15rem; margin: 20px 0 12px 0; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+        <h4 style="color: var(--text-primary); font-size: 1.15rem; margin: 20px 0 12px 0; font-weight: 600; display: flex; align-items: center; gap: 8px;">
           <span class="material-symbols-outlined" style="font-size: 1.3rem;">rocket_launch</span>
           Recent Gen AI Developments (2024-2025)
         </h4>
@@ -954,7 +1079,7 @@
           <li><strong>AI Application Delivery</strong> – Delivered multiple AI-driven applications to production using Django, Streamlit, and FastAPI, serving thousands of daily active users with sub-second response times.</li>
         </ul>
 
-        <h4 style="color: #ffffff; font-size: 1.15rem; margin: 20px 0 12px 0; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+        <h4 style="color: var(--text-primary); font-size: 1.15rem; margin: 20px 0 12px 0; font-weight: 600; display: flex; align-items: center; gap: 8px;">
           <span class="material-symbols-outlined" style="font-size: 1.3rem;">business_center</span>
           Business Intelligence & Automation Achievements
         </h4>
@@ -968,7 +1093,7 @@
           <li>Integrated AWS EC2 and SNS to support real-time AI workflows and automated notifications.</li>
         </ul>
 
-        <h4 style="color: #ffffff; font-size: 1.15rem; margin: 20px 0 12px 0; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+        <h4 style="color: var(--text-primary); font-size: 1.15rem; margin: 20px 0 12px 0; font-weight: 600; display: flex; align-items: center; gap: 8px;">
           <span class="material-symbols-outlined" style="font-size: 1.3rem;">settings</span>
           Industrial Automation & Infrastructure
         </h4>
@@ -1007,7 +1132,7 @@
     <section class="section-card scroll-reveal">
       <h2>Skills</h2>
       <div class="skills-grid">
-        <div class="skill-category" style="border-left-color: #ffffff;">
+        <div class="skill-category" style="border-left-color: var(--primary);">
           <strong style="display: flex; align-items: center; gap: 8px;">
             <span class="material-symbols-outlined" style="font-size: 1.2rem;">psychology</span>
             Generative AI & LLMs
@@ -1023,7 +1148,7 @@
           </div>
         </div>
 
-        <div class="skill-category" style="border-left-color: #ffffff;">
+        <div class="skill-category" style="border-left-color: var(--primary);">
           <strong style="display: flex; align-items: center; gap: 8px;">
             <span class="material-symbols-outlined" style="font-size: 1.2rem;">visibility</span>
             Computer Vision & ML
@@ -1174,10 +1299,10 @@
       </section>
 
       <!-- ParkHere.ai Project -->
-      <section class="section-card scroll-reveal" style="border: 1px solid #ffffff;">
+      <section class="section-card scroll-reveal" style="border: 1px solid var(--primary);">
         <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px; flex-wrap: wrap;">
           <h2 style="margin: 0;">ParkHere.ai</h2>
-          <a href="https://www.parkhere.ai" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; background: #ffffff; color: #1a1a1a; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1rem; transition: all 0.3s ease; border: 1px solid #ffffff;">
+          <a href="https://www.parkhere.ai" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; background: var(--primary); color: var(--bg-gradient-start); padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1rem; transition: all 0.5s ease; border: 1px solid var(--primary);">
             <span class="material-symbols-outlined" style="font-size: 1.2rem;">open_in_new</span>
             Visit Website
           </a>
@@ -1192,7 +1317,7 @@
           Deployed & Revenue-Generating <span class="impact-label">Live Production SaaS Platform</span>
         </div>
 
-        <h4 style="color: #ffffff; font-size: 1.15rem; margin: 24px 0 16px 0; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+        <h4 style="color: var(--text-primary); font-size: 1.15rem; margin: 24px 0 16px 0; font-weight: 600; display: flex; align-items: center; gap: 8px;">
           <span class="material-symbols-outlined" style="font-size: 1.3rem;">smart_toy</span>
           AI & Computer Vision Technology
         </h4>
@@ -1202,7 +1327,7 @@
           <li><strong>Automated Deployment Pipeline</strong> – Built webhook-based auto-deployment system eliminating manual checkups, enabling zero-downtime updates and continuous model improvements across all camera installations.</li>
         </ul>
 
-        <h4 style="color: #ffffff; font-size: 1.15rem; margin: 24px 0 16px 0; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+        <h4 style="color: var(--text-primary); font-size: 1.15rem; margin: 24px 0 16px 0; font-weight: 600; display: flex; align-items: center; gap: 8px;">
           <span class="material-symbols-outlined" style="font-size: 1.3rem;">developer_mode</span>
           Full-Stack Development & Infrastructure
         </h4>
@@ -1214,7 +1339,7 @@
           <li><strong>CI/CD & DevOps</strong> – Established automated testing, continuous integration, and deployment pipelines using GitHub Actions, reducing deployment time from hours to minutes.</li>
         </ul>
 
-        <h4 style="color: #ffffff; font-size: 1.15rem; margin: 24px 0 16px 0; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+        <h4 style="color: var(--text-primary); font-size: 1.15rem; margin: 24px 0 16px 0; font-weight: 600; display: flex; align-items: center; gap: 8px;">
           <span class="material-symbols-outlined" style="font-size: 1.3rem;">trending_up</span>
           Business Impact & Metrics
         </h4>
@@ -1234,6 +1359,68 @@
   </div>
 
   <script>
+    // Cursor Spotlight Effect with Reactive Shadows
+    function initSpotlight() {
+      const cards = document.querySelectorAll('.hero, .tab-card');
+
+      cards.forEach(card => {
+        // Create spotlight element
+        const spotlight = document.createElement('div');
+        spotlight.className = 'spotlight';
+        card.appendChild(spotlight);
+
+        // Track mouse movement
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          // Calculate center position
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          // Calculate offset from center (normalized -1 to 1)
+          const offsetX = (x - centerX) / centerX;
+          const offsetY = (y - centerY) / centerY;
+
+          // Update spotlight position
+          spotlight.style.left = x + 'px';
+          spotlight.style.top = y + 'px';
+          spotlight.style.opacity = '1';
+
+          // Create reactive shadow effect
+          // Shadow moves opposite to cursor for 3D depth effect
+          const shadowX = -offsetX * 20;
+          const shadowY = -offsetY * 20;
+          const shadowBlur = 40;
+          const shadowSpread = 0;
+
+          // Apply dynamic shadow
+          const theme = document.documentElement.getAttribute('data-theme');
+          let shadowColor = 'rgba(0, 0, 0, 0.15)'; // Default for neutral (white)
+
+          if (theme === 'career') {
+            shadowColor = 'rgba(255, 255, 255, 0.15)'; // White shadow for dark career theme
+          } else if (theme === 'entrepreneur') {
+            shadowColor = 'rgba(0, 0, 0, 0.15)'; // Dark shadow for light entrepreneur theme
+          }
+
+          card.style.boxShadow = `${shadowX}px ${shadowY}px ${shadowBlur}px ${shadowSpread}px ${shadowColor}`;
+        });
+
+        // Reset shadow when mouse leaves
+        card.addEventListener('mouseleave', () => {
+          spotlight.style.opacity = '0';
+          card.style.boxShadow = ''; // Reset to CSS default
+        });
+      });
+    }
+
+    // Initialize spotlight on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      initSpotlight();
+    });
+
     // Tab Switching Function
     function switchTab(tab) {
       // Update tab cards
@@ -1247,11 +1434,15 @@
         entrepreneurTab.classList.remove('active');
         careerContent.classList.add('active');
         entrepreneurContent.classList.remove('active');
+        // Switch to dark theme for Career
+        document.documentElement.setAttribute('data-theme', 'career');
       } else {
         entrepreneurTab.classList.add('active');
         careerTab.classList.remove('active');
         entrepreneurContent.classList.add('active');
         careerContent.classList.remove('active');
+        // Switch to light theme for Entrepreneur
+        document.documentElement.setAttribute('data-theme', 'entrepreneur');
       }
 
       // Reset counters in the newly visible tab
@@ -1281,37 +1472,10 @@
     }
 
 
-    // Theme Toggle
-    function toggleTheme() {
-      const html = document.documentElement;
-      const currentTheme = html.getAttribute('data-theme') || 'dark';
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-      html.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-
-      // Update button
-      updateThemeButton(newTheme);
-    }
-
-    function updateThemeButton(theme) {
-      const icon = document.querySelector('.theme-toggle .material-symbols-outlined');
-      const text = document.getElementById('theme-text');
-
-      if (theme === 'light') {
-        icon.textContent = 'dark_mode';
-        text.textContent = 'Dark Mode';
-      } else {
-        icon.textContent = 'light_mode';
-        text.textContent = 'Light Mode';
-      }
-    }
-
-    // Load saved theme preference (defaults to dark)
+    // Set initial neutral theme on page load
     window.addEventListener('DOMContentLoaded', () => {
-      const savedTheme = localStorage.getItem('theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      updateThemeButton(savedTheme);
+      // Start with neutral theme (no data-theme attribute)
+      document.documentElement.removeAttribute('data-theme');
     });
 
     // Scroll Reveal Animation
